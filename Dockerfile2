@@ -1,10 +1,11 @@
 FROM node:16 as builder
 
 WORKDIR /app
-COPY package.json index.js env ./
+COPY package.json index.js ./
 RUN npm install
 
 FROM node:alpine as main
 
 COPY --from=builder /app /
+EXPOSE 8080
 CMD ["index.js"]
